@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Version>3.0.2</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Description>FedEx</Description>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageProjectUrl>https://doc.dynamicweb.com/</PackageProjectUrl>
+	<PackageTags>Dynamicweb dw10 addin ecommerce shipping</PackageTags>
+    <Product>Dynamicweb CMS</Product>
+    <Company>Dynamicweb Software A/S</Company>
+    <Authors>Dynamicweb Software A/S</Authors>
+    <Copyright>Copyright © 2020 Dynamicweb Software A/S</Copyright>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Dynamicweb.Ecommerce" Version="1.10.92" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+</Project>
