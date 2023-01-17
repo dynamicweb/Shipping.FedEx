@@ -19,7 +19,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Dynamicweb.Ecommerce" Version="1.10.92" />
+    <PackageReference Include="Dynamicweb.Ecommerce" Version="10.0.0-*" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
