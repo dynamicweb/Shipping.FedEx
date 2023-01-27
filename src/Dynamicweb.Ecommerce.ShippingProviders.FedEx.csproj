@@ -2,7 +2,8 @@
   <PropertyGroup>
     <Version>3.0.2</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <Description>FedEx</Description>
+    <Title>FedEx</Title>
+    <Description>FedEx Shipping Provider</Description>
   </PropertyGroup>
   <PropertyGroup>
     <PackageProjectUrl>https://doc.dynamicweb.com/</PackageProjectUrl>
