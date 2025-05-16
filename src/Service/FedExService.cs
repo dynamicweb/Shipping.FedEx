@@ -83,7 +83,7 @@ internal sealed class FedExService
             }
         };
 
-        string response = FedExRequest.SendRequest(GetBaseAddress(), configuration);
+        string response = FedExRequest.SendRequest(GetBaseAddress(), configuration, null);
 
         TokenData = Converter.Deserialize<TokenData>(response);
         if (TokenData is not null)

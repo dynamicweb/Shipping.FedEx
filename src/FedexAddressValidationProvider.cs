@@ -101,10 +101,8 @@ public class FedexAddressValidationProvider : AddressValidatorProvider
             addressValidatorResult.ErrorMessage = string.Format("FedEx threw an exception while validating address: {0}", ex.Message);
         }
 
-        if (addressValidatorResult.IsError || addressValidatorResult.AddressFields.Count > 0)
-        {
-            order.AddressValidatorResults.Add(addressValidatorResult);
-        }
+        if (addressValidatorResult.IsError || addressValidatorResult.AddressFields.Count > 0)        
+            order.AddressValidatorResults.Add(addressValidatorResult);        
     }
 
     private void ProccessAddressValidationResponse(AddressToValidate addressToValidate, AddressValidatorResult addressValidatorResult, ValidateAddressResponse response)
@@ -137,18 +135,21 @@ public class FedexAddressValidationProvider : AddressValidatorProvider
             return;
         }
 
-        string? oldLine1 = string.Empty;
-        if (addressToValidate.Address.StreetLines.Any())
-            oldLine1 = addressToValidate.Address.StreetLines.FirstOrDefault();
+        string originalAddressLine1 = addressToValidate.Address.StreetLines?.FirstOrDefault() ?? "";
+        string validAddressLine1 = addrResult.StreetLinesToken?.FirstOrDefault() ?? "";
+        addressValidatorResult.CheckAddressField(AddressFieldType.AddressLine1, originalAddressLine1, validAddressLine1);
 
-        string? validLine1 = string.Empty;
-        if (addrResult.StreetLinesToken?.Any() is true)
-            validLine1 = addrResult.StreetLinesToken?.FirstOrDefault();
+        string originalCity = addressToValidate.Address.City ?? "";
+        string validCity = addrResult.СityToken?.FirstOrDefault()?.Value ?? "";
+        addressValidatorResult.CheckAddressField(AddressFieldType.City, originalCity, validCity);
 
-        addressValidatorResult.CheckAddressField(AddressFieldType.AddressLine1, oldLine1, validLine1);
-        addressValidatorResult.CheckAddressField(AddressFieldType.City, addressToValidate.Address.City ?? "", addrResult.СityToken?.FirstOrDefault()?.Value ?? "");
-        addressValidatorResult.CheckAddressField(AddressFieldType.Region, addressToValidate.Address.StateOrProvinceCode ?? "", addrResult.StateOrProvinceCode ?? "");
-        addressValidatorResult.CheckAddressField(AddressFieldType.ZipCode, addressToValidate.Address.PostalCode ?? "", addrResult.PostalCodeToken?.Value ?? "");
+        string originalStateOrProvinceCode = addressToValidate.Address.StateOrProvinceCode ?? "";
+        string validStateOrProvinceCode = addrResult.StateOrProvinceCode ?? "";
+        addressValidatorResult.CheckAddressField(AddressFieldType.Region, originalStateOrProvinceCode, validStateOrProvinceCode);
+
+        string originalPostalCode = addressToValidate.Address.PostalCode ?? "";
+        string validPostalCode = addrResult.PostalCodeToken?.Value ?? "";
+        addressValidatorResult.CheckAddressField(AddressFieldType.ZipCode, originalPostalCode, validPostalCode);
     }
 
     private AddressToValidate GetDeliveryAddress(Order order)
