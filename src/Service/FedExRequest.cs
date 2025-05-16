@@ -151,13 +151,13 @@ internal static class FedExRequest
         return errorMessage.ToString();
     }
 
-    private static void Log(string message, bool isRequest, ApiCommand command)
+    private static void Log(string message, bool isRequest, ApiCommand commandType)
     {
         string type = isRequest ? "Request" : "Response";
-        var errorMessage = new StringBuilder($"{type} for command: '{command}'.");
+        var errorMessage = new StringBuilder($"{type} for command: '{commandType}'.");
         errorMessage.AppendLine(message);
 
-        if (command is ApiCommand.ValidateAddress)
+        if (commandType is ApiCommand.ValidateAddress)
             LogAddressValidator(message);
         else
             LogFedEx(message, isRequest);
